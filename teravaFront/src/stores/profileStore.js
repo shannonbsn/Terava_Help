@@ -10,11 +10,11 @@ export const useProfileStore = defineStore('profile', {
     async create(profileData) {
       try {
         const response = await api.post('/profiles', profileData)
-        this.profile = response.data
+        this.profile = response.data.profile
         this.error = null
         return true
       } catch (error) {
-        console.error('Erreur profile', error)
+        console.error('🔴 Erreur création profil:', error)
         this.error = error.response?.data?.message || error.message
         return false
       }

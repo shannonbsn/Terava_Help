@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 
 #[OA\Schema(
@@ -27,9 +28,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements AuthenticatableContract
 {
-    use Notifiable;
-
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
     /**

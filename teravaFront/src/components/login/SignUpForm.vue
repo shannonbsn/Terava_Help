@@ -3,7 +3,6 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import { useProfileStore } from '@/stores/profileStore'
-import axios from 'axios'
 import authApi from '@/services/authApi'
 
 const router = useRouter()
@@ -45,12 +44,11 @@ function nextStep() {
 }
 
 async function submitForm() {
-
   await authApi.get('/sanctum/csrf-cookie')
-  
+
   if (!formData.password || formData.password !== formData.password_confirmation) {
-    alert("Mot de passe manquant ou confirmation incorrecte.");
-    return;
+    alert("Mot de passe manquant ou confirmation incorrecte.")
+    return
   }
 
   const userPayload = {
@@ -61,22 +59,20 @@ async function submitForm() {
     accept_policy: formData.accept_policy
   }
 
-  const profilePayload = {
-    firstname: formData.firstname || null,
-    lastname: formData.lastname || null,
-    gender: formData.gender,
-    birthdate: formData.birthdate,
-    bio: formData.research || null,
-    profile_picture: files.value[0]?.url || null,
-    interests: null,
-    user_id: userStore.user?.id || null
-  }
-
-  const response = await authApi.post('/register', userPayload)
-  // const userSuccess = await userStore.register(userPayload)
+  const userSuccess = await userStore.register(userPayload)
 
   if (userSuccess && userStore.user?.id) {
-    profilePayload.user_id = userStore.user.id
+    const profilePayload = {
+      firstname: formData.firstname,
+      lastname: formData.lastname,
+      gender: formData.gender,
+      birthdate: formData.birthdate,
+      bio: formData.research,
+      profile_picture: files.value[0]?.url || null,
+      interests: null,
+      user_id: userStore.user.id
+    }
+
     const profileSuccess = await profileStore.create(profilePayload)
 
     if (profileSuccess) {
