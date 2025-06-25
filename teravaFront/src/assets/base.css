@@ -1,86 +1,209 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --blue:#5EACB2;
+  --blue-light:#a5cccf;
+  --blue-lighter:#eaf4f5;
+  --orange:#ED6A33;
+  --size-sm:380px;
+  --size-md:768px;
+  --background-gradient: linear-gradient(to right, #ff9966, #66ccff);
+  --background-gray:#F3F0F0;
+  --grey-lighter:#F5F5F5;
+  --grey-light:#D9D9D966;
+  --grey-medium:#a1a1a166;
+  --grey-dark:#787878;
+  --button-large:270px
 }
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+/*--- fonts ---*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
+@font-face {
+  font-family: 'barricada-pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Barricada.ttf') format('truetype');
 }
 
 body {
-  min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: var(--size-sm);
+  margin: 0 auto!important;
+}
+
+body.onboarding-view,
+body.trip-view,
+body.create-travel-view,
+body.result-view{
+  background:var(--background-gray);
+}
+
+a{
+  color:inherit
+}
+
+h1{
+  font-family: "barricada-pro", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h2{
+  margin: 0;
+
+}
+
+h3{
+  margin:5px 0;
+}
+
+.heading{
+  font-size:2.5em;
+  line-height: 1.2em;
+  font-weight: 500;
+  text-align: center;
+}
+
+/*--- Forms ---*/
+input,text{
+  box-sizing: border-box;
+}
+
+/*--- Global styles ---*/
+
+#app{
+  height: 100vh;
+}
+
+body {
+  margin:0;
+  width: 100%;
+  /* min-height: 100vh; */
+}
+
+main{
+  max-width:var(--size-sm);
+  min-height: calc(100vh - 240px);
+  margin:0 15px;
+}
+
+.trip-view main{
+  margin:0 auto;
+  max-width: inherit;
+  width: 100%;
+}
+
+.content{
+  justify-content: flex-start;
+  align-items: center;
+  min-height: calc(100vh - 180px);
+}
+
+/*--- Alignment ---*/
+
+.flex{
+  display: flex;
+}
+
+.flex.column{
+  flex-direction: column;
+}
+
+.grid{
+  display: grid;
+}
+
+/*--- Buttons ---*/
+
+button{
+  appearance: none;
+  border-radius: 20px;
+  background-color: transparent;
+  padding:10px 20px;
+  box-shadow: none;
+  border: none;
+  width:var(--button-large);
+  filter: brightness(1);
+  transition: 0.2s ease-in-out all;
+}
+
+.btn.large{
+  width:100%;
+  border-radius: 10px;;
+}
+
+.btn.blue{
+  background-color: var(--blue);
+  color: white;
+}
+
+.btn.orange{
+  background-color: var(--orange);
+  color: white;
+}
+
+.btn.outline{
+  background-color: transparent;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.btn.icon{
+  display: flex;
+  align-items: center;
+  gap:20px;
+}
+
+.btn.icon img{
+  width: 20px;
+  height: 20px;
+}
+
+.btn:hover{
+  filter: brightness(0.8);
+}
+
+.simple-icon{
+  max-width: 36px;
+  max-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back{
+  display: flex;
+  gap:5px;
+  align-items: ba;
+}
+/*-- Home / Signup / Login --*/
+.signin-view .content{
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+}
+
+/*--- Boarding ---*/
+
+.subtitle{
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;;
+}
+
+.subtitle h2{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.subtitle a{
+  font-size: 14px;
 }
